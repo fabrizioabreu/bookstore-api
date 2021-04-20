@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fabrizio.bookstore.domain.Livro;
+import com.fabrizio.bookstore.dtos.LivroDTO;
 import com.fabrizio.bookstore.repositories.LivroRepository;
 import com.fabrizio.bookstore.service.exceptions.ObjectNotFoundException;
 
@@ -30,5 +31,26 @@ public class LivroService {
 		categoriaService.findById(id_cat);
 		return repository.findAllByCategoria(id_cat);
 	}
+	
+	// Método Update
+	public Livro update(Integer id, Livro obj) {
+		Livro newObj = findById(id);
+		updateData(newObj, obj);
+		return repository.save(newObj);
+	}
+
+	private void updateData(Livro newObj, Livro obj) {
+		newObj.setTitulo(obj.getTitulo());
+		newObj.setNome_autor(obj.getNome_autor());
+		newObj.setTexto(obj.getTexto());
+		
+	}
 
 }
+
+
+
+
+
+
+
